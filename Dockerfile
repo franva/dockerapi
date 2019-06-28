@@ -4,11 +4,11 @@ EXPOSE 80
 EXPOSE 443
 
 FROM microsoft/dotnet:2.2-sdk AS build
-WORKDIR /src
+WORKDIR "/src"
 COPY ["dockerapi/dockerapi.csproj", "dockerapi/"]
 RUN dotnet restore "dockerapi/dockerapi.csproj"
 COPY . .
-WORKDIR "/src/dockerapi"
+WORKDIR /src/dockerapi
 RUN dotnet build "dockerapi.csproj" -c Release -o /app
 
 FROM build AS publish
